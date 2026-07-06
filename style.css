@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    margin: 0;
+    padding: 2rem 1rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header h1 {
+    margin-bottom: 0.2rem;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-top: 0;
+}
+
+.scan-form {
+    background: #1e293b;
+    padding: 1.5rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.scan-form label {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+.scan-form input {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+.scan-form button {
+    margin-top: 0.5rem;
+    padding: 0.7rem;
+    background: #22c55e;
+    color: #0f172a;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.scan-form button:hover {
+    background: #16a34a;
+}
+
+.ethics-note {
+    font-size: 0.85rem;
+    color: #fbbf24;
+}
+
+.flash {
+    padding: 0.7rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.flash.error {
+    background: #7f1d1d;
+    color: #fecaca;
+}
+
+.results {
+    margin-top: 2rem;
+}
+
+.summary {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    color: #94a3b8;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1e293b;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 0.6rem;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+    font-size: 0.9rem;
+}
+
+th {
+    background: #0f172a;
+    color: #94a3b8;
+}
+
+.risk-high td:nth-child(4) {
+    color: #f87171;
+    font-weight: bold;
+}
+
+.risk-low td:nth-child(4) {
+    color: #4ade80;
+}
+
+.export-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1rem;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+footer {
+    margin-top: 3rem;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.8rem;
+}

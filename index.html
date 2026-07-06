@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Network Security Scanner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔒 Network Security Scanner</h1>
+            <p class="subtitle">A lightweight TCP port scanner &amp; risk reporter</p>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/scan" method="post" class="scan-form">
+            <label for="target">Target IP / Hostname</label>
+            <input type="text" id="target" name="target" placeholder="e.g. 127.0.0.1 or scanme.nmap.org" required>
+
+            <label for="ports">Custom Ports (optional, comma-separated)</label>
+            <input type="text" id="ports" name="ports" placeholder="e.g. 22,80,443 (leave blank for common ports)">
+
+            <button type="submit">Start Scan</button>
+        </form>
+
+        <p class="ethics-note">
+            ⚠️ Only scan systems you own or have explicit permission to test.
+        </p>
+
+        {% if result %}
+        <section class="results">
+            <h2>Scan Results for {{ result.target }}</h2>
+            <div class="summary">
+                <span>Ports scanned: {{ result.scanned_ports }}</span>
+                <span>Open ports found: {{ result.open_count }}</span>
+                <span>Duration: {{ result.duration_seconds }}s</span>
+                <span>Started: {{ result.start_time }}</span>
+            </div>
+
+            {% if result.open_ports %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Port</th>
+                        <th>Service</th>
+                        <th>Banner</th>
+                        <th>Risk</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in result.open_ports %}
+                    <tr class="risk-{{ 'high' if r.risk != 'Low' else 'low' }}">
+                        <td>{{ r.port }}</td>
+                        <td>{{ r.service }}</td>
+                        <td>{{ r.banner }}</td>
+                        <td>{{ 'High' if r.risk != 'Low' else 'Low' }}</td>
+                        <td>{{ r.risk_note }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/export" class="export-btn">⬇ Export CSV Report</a>
+            {% else %}
+            <p>No open ports found among the scanned ports.</p>
+            {% endif %}
+        </section>
+        {% endif %}
+
+        <footer>
+            <p>Built with Python &amp; Flask · For educational / authorized testing use only</p>
+        </footer>
+    </div>
+</body>
+</html>
